@@ -1,0 +1,66 @@
+﻿@model List<Trabajo_Practico.Models.Categoria>
+
+@{
+    ViewData["Title"] = "Categorías";
+}
+
+<div class="titulo-pagina">
+    <div>
+        <span class="etiqueta">Administración</span>
+        <h1>Categorías</h1>
+    </div>
+    <a asp-action="Create" class="btn-tienda">Nueva categoría</a>
+</div>
+
+<div class="tabla-contenedor">
+    <table class="tabla-admin">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Estado</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var categoria in Model)
+            {
+                <tr class="@(categoria.Activa ? "" : "fila-inactiva")">
+                    <td>@categoria.Id</td>
+                    <td>@categoria.Nombre</td>
+                    <td>@categoria.Descripcion</td>
+                    <td>
+                        @if (categoria.Activa)
+                        {
+                            <span class="estado estado-activa">Activa</span>
+                        }
+                        else
+                        {
+                            <span class="estado estado-inactiva">Inactiva</span>
+                        }
+                    </td>
+                    <td>
+                        <div class="acciones">
+                            <a asp-action="Edit" asp-route-id="@categoria.Id" class="btn-contorno">Editar</a>
+
+                            @if (categoria.Activa)
+                            {
+                                <form asp-action="Delete" asp-route-id="@categoria.Id" method="post"
+                                      onsubmit="return confirm('¿Seguro que querés dar de baja la categoría @categoria.Nombre?');">
+                                    <button type="submit" class="btn-contorno peligro">Eliminar</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <form asp-action="Reactivar" asp-route-id="@categoria.Id" method="post">
+                                    <button type="submit" class="btn-contorno exito">Reactivar</button>
+                                </form>
+                            }
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

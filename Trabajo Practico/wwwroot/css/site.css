@@ -1,0 +1,401 @@
+
+:root {
+    --negro: #4a3b3f;
+    --blanco: #fffaf8;
+    --crema: #f8ebe8;
+    --gris: #8a7a7d;
+    --linea: #efdcd8;
+    --rosa: #c98b95;
+    --verde: #7d8f74;
+    --rojo: #b34a4a;
+}
+
+body {
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    background-color: var(--blanco);
+    color: var(--negro);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.contenido {
+    flex: 1;
+}
+
+a {
+    color: var(--negro);
+}
+
+.barra-anuncio {
+    background-color: var(--negro);
+    color: var(--blanco);
+    text-align: center;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 0.55rem 1rem;
+}
+
+
+.encabezado {
+    background-color: var(--blanco);
+    border-bottom: 1px solid var(--linea);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+    .encabezado .navbar {
+        padding: 1.2rem 0;
+    }
+
+.marca {
+    font-family: 'Jost', sans-serif;
+    font-weight: 600;
+    font-size: 1.4rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--negro) !important;
+}
+
+.menu .nav-link {
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--negro);
+    padding: 0.5rem 1rem !important;
+    position: relative;
+}
+
+    .menu .nav-link::after {
+        content: "";
+        position: absolute;
+        left: 1rem;
+        right: 1rem;
+        bottom: 0.2rem;
+        height: 1px;
+        background-color: var(--negro);
+        transform: scaleX(0);
+        transition: transform 0.25s;
+    }
+
+    .menu .nav-link:hover::after {
+        transform: scaleX(1);
+    }
+
+.btn-tienda,
+.btn-contorno {
+    display: inline-block;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.btn-tienda {
+    background-color: var(--negro);
+    color: var(--blanco);
+    border: 1px solid var(--negro);
+    font-size: 0.75rem;
+    padding: 0.85rem 2rem;
+}
+
+    .btn-tienda:hover {
+        background-color: var(--blanco);
+        color: var(--negro);
+    }
+
+    .btn-tienda.claro {
+        background-color: var(--blanco);
+        color: var(--negro);
+        border-color: var(--blanco);
+    }
+
+        .btn-tienda.claro:hover {
+            background-color: transparent;
+            color: var(--blanco);
+        }
+
+.btn-contorno {
+    background-color: transparent;
+    color: var(--negro);
+    border: 1px solid var(--negro);
+    font-size: 0.68rem;
+    padding: 0.45rem 1rem;
+}
+
+    .btn-contorno:hover {
+        background-color: var(--negro);
+        color: var(--blanco);
+    }
+
+    .btn-contorno.peligro {
+        color: var(--rojo);
+        border-color: var(--rojo);
+    }
+
+        .btn-contorno.peligro:hover {
+            background-color: var(--rojo);
+            color: var(--blanco);
+        }
+
+    .btn-contorno.exito {
+        color: var(--verde);
+        border-color: var(--verde);
+    }
+
+        .btn-contorno.exito:hover {
+            background-color: var(--verde);
+            color: var(--blanco);
+        }
+
+.hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 80vh;
+    background-color: var(--crema);
+}
+
+.hero-texto {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 4rem 8%;
+}
+
+    .hero-texto .etiqueta {
+        font-size: 0.75rem;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--verde);
+    }
+
+    .hero-texto h1 {
+        font-family: 'Cormorant Garamond', serif;
+        font-style: italic;
+        font-weight: 500;
+        font-size: clamp(3rem, 6vw, 5rem);
+        line-height: 1;
+        margin: 1rem 0;
+        color: var(--negro);
+    }
+
+    .hero-texto p {
+        color: var(--gris);
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+    }
+
+.hero-imagen {
+    background: #ead3cf url('/img/portada.jpg') center / cover no-repeat;
+}
+
+@media (max-width: 768px) {
+    .hero {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-imagen {
+        min-height: 50vh;
+    }
+}
+
+.beneficios {
+    border-bottom: 1px solid var(--linea);
+    padding: 2.5rem 0;
+    text-align: center;
+}
+
+    .beneficios h6 {
+        font-size: 0.78rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        font-weight: 600;
+        margin-bottom: 0.3rem;
+    }
+
+    .beneficios p {
+        color: var(--gris);
+        font-size: 0.9rem;
+        margin: 0;
+    }
+
+.temporada {
+    background-color: var(--crema);
+    text-align: center;
+    padding: 5rem 1rem;
+}
+
+    .temporada h2 {
+        font-family: 'Cormorant Garamond', serif;
+        font-weight: 500;
+        font-size: 2.8rem;
+    }
+
+    .temporada p {
+        color: var(--gris);
+        max-width: 520px;
+        margin: 1rem auto 2rem;
+    }
+
+.titulo-pagina {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 1rem;
+    border-bottom: 1px solid var(--linea);
+    padding-bottom: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+    .titulo-pagina .etiqueta {
+        font-size: 0.7rem;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--gris);
+    }
+
+    .titulo-pagina h1 {
+        font-family: 'Cormorant Garamond', serif;
+        font-weight: 500;
+        font-size: 2.8rem;
+        margin: 0;
+    }
+
+.tabla-contenedor {
+    overflow-x: auto;
+}
+
+.tabla-admin {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .tabla-admin th {
+        font-size: 0.7rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        font-weight: 500;
+        color: var(--gris);
+        border-bottom: 1px solid var(--negro);
+        padding: 0.9rem 0.75rem;
+    }
+
+    .tabla-admin td {
+        padding: 1.1rem 0.75rem;
+        border-bottom: 1px solid var(--linea);
+        vertical-align: middle;
+    }
+
+    .tabla-admin tbody tr:hover td {
+        background-color: var(--crema);
+    }
+
+.fila-inactiva td {
+    color: #9a9a9a;
+}
+
+.estado {
+    display: inline-block;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+}
+
+.estado-activa {
+    color: var(--verde);
+}
+
+.estado-inactiva {
+    color: #9a9a9a;
+}
+
+.acciones {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+.formulario {
+    max-width: 560px;
+}
+
+    .formulario label {
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin-bottom: 0.4rem;
+    }
+
+    .formulario .form-control {
+        border-radius: 12px;
+        border: 1px solid var(--linea);
+        padding: 0.8rem 1rem;
+    }
+
+        .formulario .form-control:focus {
+            border-color: var(--negro);
+            box-shadow: none;
+        }
+
+    .formulario .form-check-input:checked {
+        background-color: var(--negro);
+        border-color: var(--negro);
+    }
+
+    .formulario .botones {
+        display: flex;
+        gap: 0.75rem;
+        margin-top: 2rem;
+    }
+
+.text-danger {
+    font-size: 0.85rem;
+}
+
+.pie {
+    background-color: var(--negro);
+    color: #bdbdbd;
+    padding: 3.5rem 0 1.5rem;
+    margin-top: 4rem;
+    font-size: 0.9rem;
+}
+
+.marca-pie {
+    color: var(--blanco) !important;
+    margin-bottom: 0.8rem;
+}
+
+.pie h6 {
+    color: var(--blanco);
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.pie ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.pie li {
+    margin-bottom: 0.4rem;
+}
+
+.pie-legal {
+    border-top: 1px solid #2c2c2c;
+    margin-top: 2.5rem;
+    padding-top: 1.2rem;
+    font-size: 0.78rem;
+}

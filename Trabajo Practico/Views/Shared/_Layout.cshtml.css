@@ -1,0 +1,128 @@
+﻿
+:root {
+    --fondo: #faf6f0;
+    --superficie: #ffffff;
+    --texto: #2b2420;
+    --texto-suave: #6f6259;
+    --acento: #b5502e;
+    --acento-oscuro: #8f3d22;
+    --borde: #e8dfd4;
+}
+
+/* ===== Base ===== */
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background-color: var(--fondo);
+    color: var(--texto);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+h1, h2, h3, .marca {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    color: var(--texto);
+}
+
+.contenido {
+    flex: 1;
+}
+
+/* ===== Menú ===== */
+.navbar-tienda {
+    background-color: var(--superficie);
+    border-bottom: 1px solid var(--borde);
+    padding: 1rem 0;
+}
+
+.marca {
+    font-size: 1.6rem;
+    color: var(--acento) !important;
+}
+
+.navbar-tienda .nav-link {
+    color: var(--texto);
+    font-weight: 500;
+    margin-left: 1rem;
+}
+
+    .navbar-tienda .nav-link:hover {
+        color: var(--acento);
+    }
+
+
+.btn-primary {
+    --bs-btn-bg: var(--acento);
+    --bs-btn-border-color: var(--acento);
+    --bs-btn-hover-bg: var(--acento-oscuro);
+    --bs-btn-hover-border-color: var(--acento-oscuro);
+    --bs-btn-active-bg: var(--acento-oscuro);
+    --bs-btn-active-border-color: var(--acento-oscuro);
+}
+
+.btn {
+    border-radius: 999px;
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+}
+
+.table {
+    background-color: var(--superficie);
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+    .table thead th {
+        background-color: var(--texto);
+        color: var(--fondo);
+        font-weight: 500;
+    }
+
+
+form {
+    background-color: var(--superficie);
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    padding: 1.5rem;
+    max-width: 600px;
+}
+
+td form {
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.form-control:focus {
+    border-color: var(--acento);
+    box-shadow: 0 0 0 0.2rem rgba(181, 80, 46, 0.2);
+}
+
+.portada {
+    text-align: center;
+    padding: 5rem 1rem;
+}
+
+    .portada h1 {
+        font-size: 3.5rem;
+    }
+
+    .portada p {
+        color: var(--texto-suave);
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+    }
+
+.pie {
+    border-top: 1px solid var(--borde);
+    background-color: var(--superficie);
+    color: var(--texto-suave);
+    padding: 1.5rem 0;
+    font-size: 0.9rem;
+}

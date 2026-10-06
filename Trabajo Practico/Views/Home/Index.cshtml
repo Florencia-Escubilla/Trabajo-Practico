@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Inicio";
+    ViewData["AnchoCompleto"] = true;
+}
+
+<section class="hero">
+    <div class="container hero-texto">
+        <span class="etiqueta">Nueva temporada</span>
+        <h1>Vestite<br />a tu manera</h1>
+        <a asp-controller="Categorias" asp-action="Index" class="btn-tienda claro">Ver colección</a>
+    </div>
+</section>
+
+<section class="beneficios">
+    <div class="container">
+        <div class="row gy-4">
+            <div class="col-md-4">
+                <h6>Envío gratis</h6>
+                <p>En compras superiores a $80.000</p>
+            </div>
+            <div class="col-md-4">
+                <h6>Cambios sin cargo</h6>
+                <p>Tenés 30 días para cambiar tu prenda</p>
+            </div>
+            <div class="col-md-4">
+                <h6>3 cuotas sin interés</h6>
+                <p>Con todas las tarjetas</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="temporada">
+    <h2>Básicos que duran</h2>
+    <p>Prendas de algodón, cortes cómodos y colores que combinan con todo.</p>
+    <a asp-controller="Categorias" asp-action="Index" class="btn-tienda">Explorar</a>
+</section>
