@@ -1,13 +1,25 @@
-﻿@{
+﻿@inject TrabajoPracticoDatos.Interfaces.ICompraRepository CompraRepository
+@{
     ViewData["Title"] = "Inicio";
     ViewData["AnchoCompleto"] = true;
+    int ventasNuevas = User.IsInRole("Administrador") ? CompraRepository.ContarNoVistas() : 0;
+}
+
+@if (ventasNuevas > 0)
+{
+    <div class="container py-4">
+        <div class="mensaje mensaje-exito aviso-ventas">
+            <span>@(ventasNuevas == 1 ? "Tenés 1 venta nueva." : $"Tenés {ventasNuevas} ventas nuevas.")</span>
+            <a asp-controller="Compras" asp-action="Ventas" class="btn-contorno">Ver ventas</a>
+        </div>
+    </div>
 }
 
 <section class="hero">
     <div class="container hero-texto">
         <span class="etiqueta">Nueva temporada</span>
         <h1>Vestite<br />a tu manera</h1>
-        <a asp-controller="Categorias" asp-action="Index" class="btn-tienda claro">Ver colección</a>
+        <a asp-controller="Catalogo" asp-action="Index" class="btn-tienda claro">Ver colección</a>
     </div>
 </section>
 
@@ -33,5 +45,5 @@
 <section class="temporada">
     <h2>Básicos que duran</h2>
     <p>Prendas de algodón, cortes cómodos y colores que combinan con todo.</p>
-    <a asp-controller="Categorias" asp-action="Index" class="btn-tienda">Explorar</a>
+    <a asp-controller="Catalogo" asp-action="Index" class="btn-tienda">Explorar</a>
 </section>

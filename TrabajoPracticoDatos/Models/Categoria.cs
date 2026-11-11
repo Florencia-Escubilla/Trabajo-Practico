@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Trabajo_Practico.Models
+namespace TrabajoPracticoDatos.Models
 {
     public class Categoria
     {

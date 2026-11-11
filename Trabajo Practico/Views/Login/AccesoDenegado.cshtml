@@ -1,0 +1,15 @@
+@{
+    ViewData["Title"] = "Acceso denegado";
+}
+
+<div class="caja-centrada">
+    <span class="etiqueta">Acceso denegado</span>
+    <h1>No tenés permiso</h1>
+    <p>Esta sección es solo para administradores de la tienda.</p>
+    <p>Si te acaban de dar el rol de administrador, cerrá sesión y volvé a ingresar para que se actualice.</p>
+
+    <div class="botones-centrados">
+        <a asp-controller="Home" asp-action="Index" class="btn-tienda">Volver al inicio</a>
+        <a asp-controller="Login" asp-action="Logout" class="btn-contorno">Cerrar sesión</a>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+@model List<TrabajoPracticoDatos.Models.Compra>
+@using System.Globalization
+
+@{
+    ViewData["Title"] = "Mis compras";
+    CultureInfo argentina = new CultureInfo("es-AR");
+}
+
+<div class="titulo-pagina">
+    <div>
+        <span class="etiqueta">Tu cuenta</span>
+        <h1>Mis compras</h1>
+    </div>
+    <a asp-controller="Catalogo" asp-action="Index" class="btn-tienda">Seguir comprando</a>
+</div>
+
+@if (Model.Count == 0)
+{
+    <p class="text-muted">Todavía no hiciste ninguna compra.</p>
+}
+else
+{
+    <div class="tabla-contenedor">
+        <table class="tabla-admin">
+            <thead>
+                <tr>
+                    <th>Foto</th>
+                    <th>Producto</th>
+                    <th>Fecha</th>
+                    <th>Precio</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var compra in Model)
+                {
+                    <tr>
+                        <td>
+                            @if (!string.IsNullOrEmpty(compra.Producto?.ImagenUrl))
+                            {
+                                <img src="@compra.Producto.ImagenUrl" alt="@compra.Producto.Nombre" class="miniatura" />
+                            }
+                            else
+                            {
+                                <div class="miniatura miniatura-vacia">Sin foto</div>
+                            }
+                        </td>
+                        <td>@compra.Producto?.Nombre</td>
+                        <td>@compra.Fecha.ToString("dd/MM/yyyy HH:mm")</td>
+                        <td>@compra.Precio.ToString("C0", argentina)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <p class="total-compras">
+        @Model.Count @(Model.Count == 1 ? "compra" : "compras") · Total: <strong>@Model.Sum(c => c.Precio).ToString("C0", argentina)</strong>
+    </p>
+}

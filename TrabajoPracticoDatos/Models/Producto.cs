@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Trabajo_Practico.Models
+namespace TrabajoPracticoDatos.Models
 {
     public class Producto
     {
@@ -35,6 +35,7 @@ namespace Trabajo_Practico.Models
         public string? ImagenUrl { get; set; }
 
         [Display(Name = "Categoría")]
+        [Required(ErrorMessage = "Tenés que elegir una categoría.")]
         [Range(1, int.MaxValue, ErrorMessage = "Tenés que elegir una categoría.")]
         public int CategoriaId { get; set; }
 

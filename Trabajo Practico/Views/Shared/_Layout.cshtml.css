@@ -9,7 +9,6 @@
     --borde: #e8dfd4;
 }
 
-/* ===== Base ===== */
 html {
     font-size: 16px;
 }
@@ -33,7 +32,6 @@ h1, h2, h3, .marca {
     flex: 1;
 }
 
-/* ===== Menú ===== */
 .navbar-tienda {
     background-color: var(--superficie);
     border-bottom: 1px solid var(--borde);

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Trabajo_Practico.Models;
+using TrabajoPracticoDatos.Models;
 
-namespace Trabajo_Practico.Data
+namespace TrabajoPracticoDatos.Data
 {
     public class TiendaContext : DbContext
     {
@@ -14,9 +14,17 @@ namespace Trabajo_Practico.Data
 
         public DbSet<Producto> Productos { get; set; }
 
+        public DbSet<Usuario> Usuarios { get; set; }
+
+        public DbSet<Compra> Compras { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Usuario>()
+                .HasIndex(u => u.Email)
+                .IsUnique();
 
             modelBuilder.Entity<Categoria>().HasData(
                 new Categoria { Id = 1, Nombre = "Remeras", Descripcion = "Remeras de algodón Remeras musculosas Bodys manga corta", Activa = true },

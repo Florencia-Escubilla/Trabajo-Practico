@@ -1,0 +1,134 @@
+@model TrabajoPracticoDatos.Models.Producto
+
+@{
+    ViewData["Title"] = "Editar producto";
+}
+
+<div class="titulo-pagina">
+    <div>
+        <span class="etiqueta">Administración</span>
+        <h1>Editar producto</h1>
+    </div>
+</div>
+
+<form asp-action="Edit" method="post" enctype="multipart/form-data" class="formulario">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="ImagenUrl" />
+
+    <div class="mb-4">
+        <label asp-for="Nombre" class="form-label"></label>
+        <input asp-for="Nombre" class="form-control" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </div>
+
+    <div class="mb-4">
+        <label asp-for="Descripcion" class="form-label"></label>
+        <textarea asp-for="Descripcion" class="form-control" rows="3"></textarea>
+        <span asp-validation-for="Descripcion" class="text-danger"></span>
+    </div>
+
+    <div class="mb-4">
+        <label asp-for="CategoriaId" class="form-label"></label>
+        <select asp-for="CategoriaId" asp-items="(SelectList)ViewBag.Categorias" class="form-control">
+            <option value="">Elegí una categoría</option>
+        </select>
+        <span asp-validation-for="CategoriaId" class="text-danger"></span>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6 mb-4">
+            <label asp-for="Precio" class="form-label"></label>
+            <input asp-for="Precio" type="number" step="0.01" min="1" class="form-control" />
+            <span asp-validation-for="Precio" class="text-danger"></span>
+        </div>
+        <div class="col-sm-6 mb-4">
+            <label asp-for="Stock" class="form-label"></label>
+            <input asp-for="Stock" min="0" class="form-control" />
+            <span asp-validation-for="Stock" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6 mb-4">
+            <label asp-for="Talle" class="form-label"></label>
+            <input asp-for="Talle" class="form-control" />
+            <span asp-validation-for="Talle" class="text-danger"></span>
+        </div>
+        <div class="col-sm-6 mb-4">
+            <label asp-for="Color" class="form-label"></label>
+            <input asp-for="Color" class="form-control" />
+            <span asp-validation-for="Color" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="mb-4">
+        <label for="imagen" class="form-label">Foto</label>
+
+        @if (!string.IsNullOrEmpty(Model.ImagenUrl))
+        {
+            <img src="@Model.ImagenUrl" alt="@Model.Nombre" class="vista-previa mb-3" id="vistaPrevia" />
+
+            <div class="form-check mb-2">
+                <input type="checkbox" name="quitarImagen" value="true" id="quitarImagen" class="form-check-input" />
+                <label for="quitarImagen" class="form-check-label">Quitar la foto actual</label>
+            </div>
+
+            <small class="text-muted d-block mb-2">Para cambiarla, elegí una foto nueva. Si no elegís ninguna, se mantiene la actual.</small>
+        }
+        else
+        {
+            <img id="vistaPrevia" class="vista-previa mb-3" alt="Vista previa de la foto" hidden />
+            <small class="text-muted d-block mb-2">Este producto todavía no tiene foto.</small>
+        }
+
+        <input type="file" name="imagen" id="imagen" accept=".jpg,.jpeg,.png,.webp" class="form-control" />
+        <small class="text-muted">JPG, PNG o WEBP, hasta 5 MB.</small>
+    </div>
+
+    <div class="form-check mb-3">
+        <input asp-for="Activo" class="form-check-input" />
+        <label asp-for="Activo" class="form-check-label"></label>
+    </div>
+
+    <div class="botones">
+        <button type="submit" class="btn-tienda">Guardar cambios</button>
+        <a asp-action="Index" class="btn-tienda claro" style="border-color: var(--negro);">Volver</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        const campoImagen = document.getElementById('imagen');
+        const vistaPrevia = document.getElementById('vistaPrevia');
+        const quitarImagen = document.getElementById('quitarImagen');
+        const fotoOriginal = vistaPrevia.getAttribute('src');
+
+        campoImagen.addEventListener('change', function () {
+            const archivo = this.files[0];
+
+            if (archivo) {
+                vistaPrevia.src = URL.createObjectURL(archivo);
+                vistaPrevia.hidden = false;
+                vistaPrevia.classList.remove('foto-quitada');
+
+                if (quitarImagen) {
+                    quitarImagen.checked = false;
+                }
+            }
+        });
+
+        if (quitarImagen) {
+            quitarImagen.addEventListener('change', function () {
+                if (this.checked) {
+                    campoImagen.value = '';
+                    vistaPrevia.src = fotoOriginal;
+                }
+
+                vistaPrevia.classList.toggle('foto-quitada', this.checked);
+            });
+        }
+    </script>
+}

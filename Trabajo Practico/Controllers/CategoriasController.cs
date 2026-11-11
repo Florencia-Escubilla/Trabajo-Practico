@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Trabajo_Practico.Models;
-using Trabajo_Practico.Repositories;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using TrabajoPracticoDatos.Models;
+using TrabajoPracticoDatos.Interfaces;
 
 namespace Trabajo_Practico.Controllers
 {
+    [Authorize(Roles = "Administrador")]
     public class CategoriasController : Controller
     {
         private readonly ICategoriaRepository _repository;

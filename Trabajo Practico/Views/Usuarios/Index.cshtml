@@ -1,0 +1,78 @@
+@model List<TrabajoPracticoDatos.Models.Usuario>
+@using System.Security.Claims
+
+@{
+    ViewData["Title"] = "Usuarios";
+    string? miEmail = User.FindFirstValue(ClaimTypes.Email);
+    string? emailPrincipal = ViewBag.EmailAdministradorPrincipal;
+}
+
+<div class="titulo-pagina">
+    <div>
+        <span class="etiqueta">Administración</span>
+        <h1>Usuarios</h1>
+    </div>
+</div>
+
+@if (TempData["Mensaje"] != null)
+{
+    <div class="mensaje mensaje-exito">@TempData["Mensaje"]</div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="mensaje mensaje-error">@TempData["Error"]</div>
+}
+
+<p class="text-muted">
+    Cada persona que ingresa con Google queda registrada como <strong>Cliente</strong>,
+    salvo el administrador principal de la tienda, que entra directamente como <strong>Administrador</strong>.
+    Desde acá podés darle o quitarle el rol de <strong>Administrador</strong> a los demás.
+    El cambio se aplica la próxima vez que esa persona inicie sesión.
+</p>
+
+<div class="tabla-contenedor">
+    <table class="tabla-admin">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Rol</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var usuario in Model)
+            {
+                bool esAdmin = usuario.Rol == Usuario.RolAdministrador;
+                bool soyYo = usuario.Email == miEmail;
+                bool esPrincipal = string.Equals(usuario.Email, emailPrincipal, StringComparison.OrdinalIgnoreCase);
+
+                <tr>
+                    <td>@usuario.Nombre @(soyYo ? "(vos)" : "") @(esPrincipal ? "· principal" : "")</td>
+                    <td>@usuario.Email</td>
+                    <td>
+                        <span class="rol @(esAdmin ? "rol-admin" : "")">@usuario.Rol</span>
+                    </td>
+                    <td>
+                        <div class="acciones">
+                            @if (!esAdmin)
+                            {
+                                <form asp-action="AsignarAdministrador" asp-route-id="@usuario.Id" method="post">
+                                    <button type="submit" class="btn-contorno exito">Hacer administrador</button>
+                                </form>
+                            }
+                            else if (!soyYo && !esPrincipal)
+                            {
+                                <form asp-action="QuitarAdministrador" asp-route-id="@usuario.Id" method="post"
+                                      onsubmit="return confirm('¿Seguro que querés quitarle el rol de administrador a este usuario?');">
+                                    <button type="submit" class="btn-contorno peligro">Quitar administrador</button>
+                                </form>
+                            }
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

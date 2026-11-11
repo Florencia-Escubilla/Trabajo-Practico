@@ -1,0 +1,67 @@
+@model List<TrabajoPracticoDatos.Models.Compra>
+@using System.Globalization
+
+@{
+    ViewData["Title"] = "Ventas";
+    CultureInfo argentina = new CultureInfo("es-AR");
+    List<int> idsNuevas = ViewBag.IdsNuevas;
+}
+
+<div class="titulo-pagina">
+    <div>
+        <span class="etiqueta">Administración</span>
+        <h1>Ventas</h1>
+    </div>
+</div>
+
+@if (idsNuevas.Count > 0)
+{
+    <div class="mensaje mensaje-exito">
+        @(idsNuevas.Count == 1 ? "Tenés 1 venta nueva desde la última vez que entraste." : $"Tenés {idsNuevas.Count} ventas nuevas desde la última vez que entraste.")
+    </div>
+}
+
+@if (Model.Count == 0)
+{
+    <p class="text-muted">Todavía no hay ventas.</p>
+}
+else
+{
+    <div class="tabla-contenedor">
+        <table class="tabla-admin">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Cliente</th>
+                    <th>Email</th>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var venta in Model)
+                {
+                    bool esNueva = idsNuevas.Contains(venta.Id);
+
+                    <tr class="@(esNueva ? "fila-nueva" : "")">
+                        <td>
+                            @venta.Fecha.ToString("dd/MM/yyyy HH:mm")
+                            @if (esNueva)
+                            {
+                                <span class="etiqueta-nueva">Nueva</span>
+                            }
+                        </td>
+                        <td>@venta.Usuario?.Nombre</td>
+                        <td>@venta.Usuario?.Email</td>
+                        <td>@venta.Producto?.Nombre</td>
+                        <td>@venta.Precio.ToString("C0", argentina)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <p class="total-compras">
+        @Model.Count @(Model.Count == 1 ? "venta" : "ventas") · Total vendido: <strong>@Model.Sum(v => v.Precio).ToString("C0", argentina)</strong>
+    </p>
+}

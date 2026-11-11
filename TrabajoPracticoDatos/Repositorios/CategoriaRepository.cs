@@ -1,7 +1,8 @@
-﻿using Trabajo_Practico.Data;
-using Trabajo_Practico.Models;
+﻿using TrabajoPracticoDatos.Data;
+using TrabajoPracticoDatos.Interfaces;
+using TrabajoPracticoDatos.Models;
 
-namespace Trabajo_Practico.Repositories
+namespace TrabajoPracticoDatos.Repositorios
 {
     public class CategoriaRepository : ICategoriaRepository
     {

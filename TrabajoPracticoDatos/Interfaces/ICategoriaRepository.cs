@@ -1,6 +1,6 @@
-﻿using Trabajo_Practico.Models;
+﻿using TrabajoPracticoDatos.Models;
 
-namespace Trabajo_Practico.Repositories
+namespace TrabajoPracticoDatos.Interfaces
 {
     public interface ICategoriaRepository
     {

@@ -1,0 +1,103 @@
+@model List<TrabajoPracticoDatos.Models.Producto>
+@using System.Globalization
+
+@{
+    ViewData["Title"] = "Catálogo";
+    List<Categoria> categorias = ViewBag.Categorias;
+    int? categoriaElegida = ViewBag.CategoriaElegida;
+    CultureInfo argentina = new CultureInfo("es-AR");
+    bool esCliente = User.IsInRole("Cliente");
+}
+
+<div class="titulo-pagina">
+    <div>
+        <span class="etiqueta">Nueva temporada</span>
+        <h1>Catálogo</h1>
+    </div>
+    @if (esCliente)
+    {
+        <a asp-controller="Compras" asp-action="MisCompras" class="btn-contorno">Mis compras</a>
+    }
+</div>
+
+@if (TempData["Mensaje"] != null)
+{
+    <div class="mensaje mensaje-exito">@TempData["Mensaje"]</div>
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="mensaje mensaje-error">@TempData["Error"]</div>
+}
+
+<div class="filtros">
+    <a asp-action="Index" class="filtro @(categoriaElegida == null ? "activo" : "")">Todo</a>
+    @foreach (var categoria in categorias)
+    {
+        <a asp-action="Index" asp-route-categoriaId="@categoria.Id"
+           class="filtro @(categoriaElegida == categoria.Id ? "activo" : "")">@categoria.Nombre</a>
+    }
+</div>
+
+@if (Model.Count == 0)
+{
+    <p class="text-muted">Todavía no hay productos en esta categoría.</p>
+}
+else
+{
+    <div class="row g-4">
+        @foreach (var producto in Model)
+        {
+            string precio = producto.Precio.ToString("C0", argentina);
+
+            <div class="col-sm-6 col-lg-4">
+                <div class="tarjeta-producto">
+                    <div class="tarjeta-imagen">
+                        @if (!string.IsNullOrEmpty(producto.ImagenUrl))
+                        {
+                            <img src="@producto.ImagenUrl" alt="@producto.Nombre" />
+                        }
+                        else
+                        {
+                            <span>Flor Indumentaria</span>
+                        }
+                    </div>
+
+                    <div class="tarjeta-texto">
+                        <span class="etiqueta">@producto.Categoria?.Nombre</span>
+                        <h2>@producto.Nombre</h2>
+                        <p>@producto.Descripcion</p>
+                        <p class="detalle">Talle @producto.Talle · @producto.Color</p>
+
+                        <div class="tarjeta-pie">
+                            <span class="precio">@precio</span>
+
+                            @if (esCliente && producto.Stock > 0)
+                            {
+                                <form asp-controller="Compras" asp-action="Comprar" method="post"
+                                      data-mensaje="¿Confirmás la compra de @producto.Nombre por @precio?"
+                                      onsubmit="return confirm(this.dataset.mensaje);">
+                                    <input type="hidden" name="productoId" value="@producto.Id" />
+                                    <input type="hidden" name="categoriaId" value="@categoriaElegida" />
+                                    <button type="submit" class="btn-comprar">Comprar</button>
+                                </form>
+                            }
+                            else if (esCliente)
+                            {
+                                <button type="button" class="btn-comprar" disabled>Sin stock</button>
+                            }
+                            else if (producto.Stock > 0)
+                            {
+                                <span class="estado estado-activa">En stock</span>
+                            }
+                            else
+                            {
+                                <span class="estado estado-inactiva">Sin stock</span>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
