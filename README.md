@@ -1,6 +1,6 @@
-# 0Flor Indumentaria
+# Flor Indumentaria
 
-**Tienda online de ropa ** — Trabajo práctico individual de Programación IV (UNLZ).
+**Tienda online de ropa** — Trabajo práctico individual de Programación IV (UNLZ).
 
 ---
 
@@ -115,12 +115,13 @@ Hay dos tipos de usuario (**roles**):
 
 ## Cómo dar o quitar el permiso de administrador
 
-**Desde la página **
+**Desde la página**
 
 1. Entrar con una cuenta de administrador.
 2. Ir a **Administración** → **Usuarios**.
 3. Tocar **Hacer administrador** (para darlo) o **Quitar administrador** (para sacarlo).
- **Importante:** después de cambiar el permiso, esa persona tiene que **cerrar sesión y volver a entrar** para que se note el cambio.
+
+**Importante:** después de cambiar el permiso, esa persona tiene que **cerrar sesión y volver a entrar** para que se note el cambio.
 
 ## Cómo está organizado el código
 
